@@ -1,0 +1,38 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="document" type="root"/>
+    <xsd:complexType name="root" mixed="true">
+        <xsd:group ref="element" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:attribute name="title" type="xsd:token" use="required"/>
+        <xsd:attribute name="path" type="xsd:token"/>
+    </xsd:complexType>
+    <xsd:complexType name="resource">
+        <xsd:attribute name="uri" type="xsd:anyURI"/>
+        <xsd:attribute name="type" type="mimeType"/>
+    </xsd:complexType>
+    <xsd:simpleType name="mimeType">
+        <xsd:restriction base="xsd:token">
+            <xsd:pattern value="[^;/\s]+/[^;/\s]+"/>
+            <xsd:whiteSpace value="replace"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="table">
+        <xsd:sequence>
+            <xsd:element ref="thead" minOccurs="0"/>
+            <xsd:element ref="tbody" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:group name="element">
+        <xsd:choice>
+            <xsd:element name="image" type="resource"/>
+            <xsd:element name="embed" type="resource"/>
+            <xsd:element name="emphasis" type="numericSpecifier"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="numericSpecifier">
+        <xsd:group ref="element"/>
+        <xsd:attribute name="value" type="xsd:decimal"/>
+    </xsd:complexType>
+    <xsd:element name="thead"></xsd:element>
+    <xsd:element name="tbody"></xsd:element>
+</xsd:schema>

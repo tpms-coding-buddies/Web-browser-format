@@ -5,14 +5,15 @@
                 <xsd:element name="content" type="xsd:string"/>
                 <xsd:element name="include" minOccurs="0" maxOccurs="unbounded">
                     <xsd:complexType>
-                        <xsd:attribute name="type">
+                        <xsd:attribute name="type" use="required">
                             <xsd:simpleType>
-                                <xsd:restriction base="xsd:string">
+                                <xsd:restriction base="xsd:token">
                                     <xsd:pattern value="[^;/\s]+/[^;/\s]+"/>
+                                    <xsd:whiteSpace value="replace"/>
                                 </xsd:restriction>
                             </xsd:simpleType>
                         </xsd:attribute>
-                        <xsd:attribute name="uri" type="xsd:anyURI"/>
+                        <xsd:attribute name="uri" type="xsd:anyURI" use="required"/>
                     </xsd:complexType>
                 </xsd:element>
             </xsd:sequence>
